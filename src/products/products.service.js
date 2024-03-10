@@ -2,9 +2,9 @@ const knex = require("../db/connection");
 
 // SQL Query using Knex syntax
 function list() {
-    knex("categories").select("*");
+  return knex("products").select("*");
 }
 
 module.exports = {
-    list,
-}
+  list,
+};
