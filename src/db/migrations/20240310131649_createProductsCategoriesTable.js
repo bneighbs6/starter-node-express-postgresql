@@ -1,9 +1,25 @@
+const { TableBuilder } = require("knex");
+
 /**
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
 exports.up = function(knex) {
-  
+  return knex.schema.createTable("products_categories", (table) => {
+    table.integer("product_id").unsigned().notNullable();
+    table
+        .foreign("product_id")
+        .references("product_id")
+        .inTable("products")
+        .onDelete("cascade");
+    table.integer("category_id").unsigned().notNullable();
+    table
+        .foreign("category_id")
+        .references("category_id")
+        .inTable("categories")
+        .onDelete("cascade")
+    table.timestamps(true, true);
+  });
 };
 
 /**
@@ -11,5 +27,5 @@ exports.up = function(knex) {
  * @returns { Promise<void> }
  */
 exports.down = function(knex) {
-  
+    return knex.schema.dropTable("product_categories")
 };
