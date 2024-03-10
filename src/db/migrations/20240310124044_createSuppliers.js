@@ -4,7 +4,7 @@
  */
 exports.up = function(knex) {
   return knex.schema.createTable("suppliers", (table) => {
-    table.increments("supplier_id").primary(); // Set supplier_id as primary key
+    table.increments("supplier_id").primary(); // Sets supplier_id as the primary key
     table.string("supplier_name");
     table.string("supplier_address_line_1");
     table.string("supplier_address_line_2");
@@ -15,8 +15,8 @@ exports.up = function(knex) {
     table.string("supplier_email");
     table.text("supplier_notes");
     table.string("supplier_type_of_goods");
-    table.timestamps(true, true) // Adds created_at and udpated_at columns
-  })
+    table.timestamps(true, true); // Adds created_at and updated_at columns
+  });
 };
 
 /**
