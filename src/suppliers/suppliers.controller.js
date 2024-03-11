@@ -46,22 +46,13 @@ async function create(req, res) {
   res.status(201).json({ data })
 }
 
-/* function create(req, res, next) {
-  suppliersService
-    .create(req.body.data)
-    .then((data) => res.status(201).json({data}))
-    .catch(next);
-} */
-
-function update(req, res, next) {
+async function update(req, res) {
   const updatedSupplier = {
     ...req.body.data,
     supplier_id: res.locals.supplier.supplier_id,
   };
-  suppliersService
-    .update(updatedSupplier)
-    .then((data) => res.json({ data }))
-    .catch(next);
+  const data = await suppliersService.update(updatedSupplier);
+  res.json({ data })
 }
 
 function destroy(req, res, next) {
