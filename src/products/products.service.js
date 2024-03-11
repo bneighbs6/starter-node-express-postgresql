@@ -24,6 +24,18 @@ function listOutOfStockCount() {
     .groupBy("out_of_stock");
 }
 
+// SQL Query to list price summary
+// Selects supplier_id column from products table
+// returns min, max, avg values of product_price & groups by supplier_id
+function listPriceSummary() {
+  return knex("products")
+    .select("supplier_id")
+    .min("product_price")
+    .max("product_price")
+    .avg("product_price")
+    .groupBy("supplier_id")
+}
+
 module.exports = {
   read,
   list,
