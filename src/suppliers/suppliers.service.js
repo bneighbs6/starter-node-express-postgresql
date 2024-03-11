@@ -18,8 +18,15 @@ function read(supplier_id) {
       .where({ supplier_id: updatedSupplier.supplier_id })
       .update(updatedSupplier, "*");
   }
+
+  function destroy(supplier_id) {
+    return knex("suppliers")
+    .where({ supplier_id })
+    .del();
+  }
 module.exports = {
     create,
     read,
     update,
+    delete: destroy,
 }
