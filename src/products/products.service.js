@@ -40,4 +40,5 @@ module.exports = {
   read,
   list,
   listOutOfStockCount,
+  listPriceSummary
 };
