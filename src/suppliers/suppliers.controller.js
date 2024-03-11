@@ -14,6 +14,7 @@ const VALID_PROPERTIES = [
   "supplier_notes",
   "supplier_type_of_goods",
 ];
+// Middleware Functions
 
 function hasOnlyValidProperties(req, res, next) {
   const { data = {} } = req.body; 
@@ -31,6 +32,19 @@ function hasOnlyValidProperties(req, res, next) {
     next();
 }
 
+function supplierExists(req, res, next) {
+  suppliersService
+    .read(req.params.supplierId)
+    .then((supplier) => {
+      if (supplier) {
+        res.locals.supplier = supplier;
+        return next();
+      }
+      next({ status: 404, message: `Supplier cannot be found.` });
+    })
+    .catch(next);
+}
+
 function create(req, res, next) {
   suppliersService
     .create(req.body.data)
@@ -39,7 +53,7 @@ function create(req, res, next) {
 }
 
 async function update(req, res, next) {
-  res.json({ data: { supplier_name: "updated supplier" } });
+  
 }
 
 async function destroy(req, res, next) {
