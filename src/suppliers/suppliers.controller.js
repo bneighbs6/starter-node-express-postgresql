@@ -32,25 +32,26 @@ function hasOnlyValidProperties(req, res, next) {
     next();
 }
 
-function supplierExists(req, res, next) {
-  suppliersService
-    .read(req.params.supplierId)
-    .then((supplier) => {
-      if (supplier) {
-        res.locals.supplier = supplier;
-        return next();
-      }
-      next({ status: 404, message: `Supplier cannot be found.` });
-    })
-    .catch(next);
+async function supplierExists(req, res) {
+  const supplier = await suppliersService.read(req.params.supplierId);
+  if (supplier) {
+    res.locals.supplier = supplier; 
+    return next()
+  }
+  next({ status: 404, message: `Supplier cannot be found.`})
 }
 
-function create(req, res, next) {
+async function create(req, res) {
+  const data = await suppliersService.create(req.body.data);
+  res.status(201).json({ data })
+}
+
+/* function create(req, res, next) {
   suppliersService
     .create(req.body.data)
     .then((data) => res.status(201).json({data}))
     .catch(next);
-}
+} */
 
 function update(req, res, next) {
   const updatedSupplier = {
