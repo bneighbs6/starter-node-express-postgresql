@@ -16,7 +16,7 @@ function list() {
 }
 
 // SQL Query to list out of stock products 
-function listOutOfStock() {
+function listOutOfStockCount() {
   return knex("products")
     .select("product_quantity_in_stock as out_of_stock")
     .count("product_id")
@@ -27,4 +27,5 @@ function listOutOfStock() {
 module.exports = {
   read,
   list,
+  listOutOfStockCount,
 };
