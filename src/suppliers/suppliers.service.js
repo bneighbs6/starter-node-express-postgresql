@@ -10,15 +10,14 @@ function create(supplier) {
 
 function read(supplier_id) {
     return knex("suppliers").select("*").where({ supplier_id }).first();
-}
-
-
-function update(updatedSupplier) {
+  }
+  
+  function update(updatedSupplier) {
     return knex("suppliers")
-        .select("*")
-        .where({ supplier_id: updatedSupplier.supplier_id })
-        .update(updatedSupplier, "*")
-}
+      .select("*")
+      .where({ supplier_id: updatedSupplier.supplier_id })
+      .update(updatedSupplier, "*");
+  }
 module.exports = {
     create,
     read,
