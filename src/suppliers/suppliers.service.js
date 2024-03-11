@@ -21,4 +21,6 @@ function update(updatedSupplier) {
 }
 module.exports = {
     create,
+    read,
+    update,
 }

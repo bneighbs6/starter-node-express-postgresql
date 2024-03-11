@@ -48,6 +48,6 @@ async function destroy(req, res, next) {
 
 module.exports = {
   create: [hasOnlyValidProperties, hasRequiredProperites, create],
-  update,
+  update: [hasOnlyValidProperties, hasRequiredProperites, update],
   delete: destroy,
 };
