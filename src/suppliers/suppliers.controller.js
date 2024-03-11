@@ -62,7 +62,10 @@ async function destroy(req, res) {
 }
 
 module.exports = {
-  create: [hasOnlyValidProperties, hasRequiredProperites, create],
-  update: [supplierExists, hasOnlyValidProperties, hasRequiredProperites, update],
-  delete: [supplierExists, destroy],
+  create: [
+    hasOnlyValidProperties, 
+    hasRequiredProperites, 
+    asyncErrorBoundary(create)],
+  update: [asyncErrorBoundary(supplierExists), hasOnlyValidProperties, hasRequiredProperites, asyncErrorBoundary(update)],
+  delete: [asyncErrorBoundary(supplierExists), asyncErrorBoundary(destroy)],
 };
