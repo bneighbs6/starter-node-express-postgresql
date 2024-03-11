@@ -55,11 +55,10 @@ async function update(req, res) {
   res.json({ data })
 }
 
-function destroy(req, res, next) {
-  suppliersService
-    .delete(res.locals.supplier.supplier_id)
-    .then(() => res.sendStatus(204))
-    .catch(next);
+async function destroy(req, res) {
+  const { supplier } = res.locals; 
+  await suppliersService.delete(supplier.supplier_id);
+  res.sendStatus(204);
 }
 
 module.exports = {
