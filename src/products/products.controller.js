@@ -1,17 +1,15 @@
 const productsService = require("./products.service");
 
 // Validation Middleware
-function productExists(req, res, next) {
-  productsService
-    .read(req.params.productId)
-    .then((product) => {
-      if (product) {
-        res.locals.product = product;
-        return next();
-      }
-      next({status: 404, message: `Product cannot be found.`});
-    })
-    .catch(next);
+
+async function productExists(req, res) {
+  const product = await productsService.read(req.params.productId);
+  if (product) {
+    res.locals.product = product; 
+    return next();
+  }
+  next({status:404, message: `Product cannot be found`})
+
 }
 
 function read(req, res, next) {
