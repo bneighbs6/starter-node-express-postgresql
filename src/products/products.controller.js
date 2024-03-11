@@ -1,7 +1,22 @@
 const productsService = require("./products.service");
 
+// Validation Middleware
+function productExists(req, res, next) {
+  productsService
+    .read(req.params.productId)
+    .then((product) => {
+      if (product) {
+        res.locals.product = product;
+        return next();
+      }
+      next({status: 404, message: `Product cannot be found.`});
+    })
+    .catch(next);
+}
+
 function read(req, res, next) {
-  res.json({ data: { product_title: "some product title" } });
+  const { product: data } = res.locals;
+  res.json({ data });
 }
 
 function list(req, res, next) {
@@ -12,6 +27,6 @@ function list(req, res, next) {
 }
 
 module.exports = {
-  read: [read],
+  read: [productExists, read],
   list: [list],
 };
