@@ -43,10 +43,9 @@ function listTotalWeightByProduct() {
       "product_title",
       knex.raw(
         "sum(product_weight_in_lbs * product_quantity_in_stock) as total_weight_in_lbs"
-        )
+      )
     )
     .groupBy("product_title", "product_sku");
-
 }
 
 module.exports = {
