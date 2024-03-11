@@ -52,8 +52,15 @@ function create(req, res, next) {
     .catch(next);
 }
 
-async function update(req, res, next) {
-  
+function update(req, res, next) {
+  const updatedSupplier = {
+    ...req.body.data,
+    supplier_id: res.locals.supplier.supplier_id,
+  };
+  suppliersService
+    .update(updatedSupplier)
+    .then((data) => res.json({ data }))
+    .catch(next);
 }
 
 async function destroy(req, res, next) {
