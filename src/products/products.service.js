@@ -7,7 +7,9 @@ const knex = require("../db/connection");
 
 // SQL Query using knex syntax
 function read(productId) {
+  console.log(productId);
   return knex("products").select("*").where({ product_id: productId}).first();
+
 }
 
 // SQL Query using Knex syntax

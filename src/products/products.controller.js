@@ -3,14 +3,13 @@ const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 
 // Validation Middleware
 
-async function productExists(req, res) {
+async function productExists(req, res, next) {
   const product = await productsService.read(req.params.productId);
   if (product) {
-    res.locals.product = product; 
+    res.locals.product = product;
     return next();
   }
-  next({status:404, message: `Product cannot be found`})
-
+  next({ status: 404, message: `Product cannot be found.` });
 }
 
 function read(req, res, next) {
