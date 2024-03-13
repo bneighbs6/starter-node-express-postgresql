@@ -18,8 +18,8 @@ function read(req, res, next) {
 }
 
 async function list(req, res) {
-  await productsService.list()
-  res.json({ data })
+  // await productsService.list()
+  res.json({ data: await productsService.list() })
 }
 
 async function listOutOfStockCount(req, res, next) {
