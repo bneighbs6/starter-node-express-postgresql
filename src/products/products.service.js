@@ -10,8 +10,8 @@ const addCategory = mapProperties({
 
 // Creates a knex query
 // selects all columns from products table
-// where product_id mathces argument passed to read()
-// first() returns the first row int he table as an object
+// where product_id matches argument passed to read()
+// first() returns the first row in the table as an object
 // SQL Query using knex syntax
 function read(product_id) {
   return knex("products as p")
